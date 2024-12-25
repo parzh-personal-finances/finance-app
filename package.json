@@ -1,9 +1,9 @@
 {
-  "name": "eco-monorepo",
+  "name": "finance-app",
   "version": "0.0.1",
   "author": "Dmytro Parzhytskyi <parzhitsky@gmail.com>",
   "private": true,
-  "repository": "https://github.com/eco-repositories/eco-monorepo",
+  "repository": "https://github.com/eco-repositories/finance-app",
   "workspaces": [
     "packages/*"
   ],
