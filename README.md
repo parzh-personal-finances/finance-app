@@ -1,13 +1,4 @@
-## Hardcoded values to update after forking the template
-
-| path to file | path to text | current text |
--|-|-
-[`/package.json`](/package.json) | `$.name` | `"eco-monorepo"`
-[`/package.json`](/package.json) | `$.author` | `"Dmytro Parzhytskyi <parzhitsky@gmail.com>"`
-[`/package.json`](/package.json) | `$.repository` | `"https://github.com/eco-repositories/eco-monorepo"`
-[`/package-lock.json`](/package-lock.json) | `$.name` | `"eco-monorepo"`
-[`/package-lock.json`](/package-lock.json) | `$.packages[""].name` | `"eco-monorepo"`
-[`/packages/client/index.html`](/packages/client/index.html) | `html>head>title` | `"Client App"`
+# `finance-app`
 
 ## Starting the application stack
 
