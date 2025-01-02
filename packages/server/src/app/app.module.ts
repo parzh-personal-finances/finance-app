@@ -6,6 +6,8 @@ import { AppErrorFilter } from './app-error/app-error.filter.js'
 import { DevModule } from './dev/dev.module.js'
 import { HttpLoggerMiddleware } from './http-logger.middleware.js'
 import { HttpRateLimiterMiddleware } from './http-rate-limiter.middleware.js'
+import { EntitiesModule } from '@/entities/entities.module.js'
+import { TransactionsModule } from '@/transactions/transactions.module.js'
 
 /** @private */
 interface RegisterParams {
@@ -16,6 +18,8 @@ interface RegisterParams {
   imports: [
     ConfigModule,
     DbModule,
+    EntitiesModule,
+    TransactionsModule,
     HealthModule,
   ],
   providers: [

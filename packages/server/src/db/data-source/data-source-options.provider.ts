@@ -21,10 +21,15 @@ export const dataSourceOptionsProvider: Provider<DataSourceOptions> = {
   useFactory: (config: ConfigService) => ({
     type: 'postgres',
     host: config.get(config.keys.DB_HOST),
-    port: +config.get(config.keys.DB_PORT),
+    port: config.get(config.keys.DB_PORT),
     username: config.get(config.keys.DB_USER),
     password: config.get(config.keys.DB_PASS),
     database: config.get(config.keys.DB_NAME),
+    ssl: !config.isDevelopment() && {
+      requestCert: true,
+      rejectUnauthorized: false,
+    },
+    retryAttempts: 5,
     entities: [
       resolve(packageSourceCodeDirPath, '**/*.{model,entity}.{ts,js}'),
     ],
@@ -35,6 +40,7 @@ export const dataSourceOptionsProvider: Provider<DataSourceOptions> = {
     migrationsTableName: 'migration',
     migrationsTransactionMode: 'all',
     migrationsRun: true,
+    synchronize: config.isDevelopment(),
     logger: dbLogger,
   }),
 }

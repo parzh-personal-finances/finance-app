@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer'
-import { IsInt, IsNotEmpty, IsPort, IsPositive, IsString, Min } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, IsPort, IsPositive, IsString, Min } from 'class-validator'
 import { EnvName } from './env-name.js'
 import { IsValidEnum } from './is-valid-enum.decorator.js'
 
@@ -16,11 +16,13 @@ export const MIN_RATE_LIMITER_MAX_HITS_PER_TIMEFRAME = 1
 export const defaults = {
   NODE_ENV: EnvName.production,
   PORT: '3000',
+  DB_PORT: 5432,
   RATE_LIMITER_TIMEFRAME_MSEC: 1000,
   RATE_LIMITER_MAX_HITS_PER_TIMEFRAME: 5,
 } satisfies Partial<ConfigDTO>
 
 export class ConfigDTO {
+  @IsOptional()
   @IsValidEnum(EnvName)
   readonly NODE_ENV: EnvName = defaults.NODE_ENV
 
@@ -28,8 +30,9 @@ export class ConfigDTO {
   @IsNotEmpty()
   readonly DB_HOST!: string
 
+  @IsOptional()
   @IsPort()
-  readonly DB_PORT!: string
+  readonly DB_PORT: number = defaults.DB_PORT;
 
   @IsString()
   @IsNotEmpty()
