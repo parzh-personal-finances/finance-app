@@ -1,10 +1,9 @@
-import { Column, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity as TypeOrmEntity, JoinColumn, ManyToOne } from 'typeorm';
 import { ColumnMoney } from '@/db/column-money.decorator.js';
-import { Table } from '@/db/table.decorator.js';
 import { Transaction } from '@/transactions/transaction.entity.js';
 import { Entity } from '@/entities/entity.entity.js';
 
-@Table('balance_event')
+@TypeOrmEntity('balance_event')
 export class BalanceEvent {
   @Column({
     name: 'transaction_id',

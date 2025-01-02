@@ -1,6 +1,5 @@
-import { Column, OneToMany } from 'typeorm'
+import { Column, Entity as TypeOrmEntity, OneToMany } from 'typeorm'
 import { PrimaryColumnUUID } from '@/db/primary-column-uuid.decorator.js'
-import { Table } from '@/db/table.decorator.js'
 import { BalanceEvent } from './balance-event.entity.js'
 
 /** @private */
@@ -13,7 +12,7 @@ const entityTypes = [
 
 export type EntityType = (typeof entityTypes)[number]
 
-@Table({
+@TypeOrmEntity({
   name: 'entity',
 })
 export class Entity {

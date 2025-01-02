@@ -1,11 +1,10 @@
-import { Column, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
+import { Column, Entity as TypeOrmEntity, JoinColumn, ManyToOne, OneToMany } from 'typeorm'
 import { Entity } from '@/entities/entity.entity.js'
 import { PrimaryColumnUUID } from '@/db/primary-column-uuid.decorator.js'
-import { Table } from '@/db/table.decorator.js'
 import { ColumnMoney } from '@/db/column-money.decorator.js'
 import { BalanceEvent } from '@/entities/balance-event.entity.js'
 
-@Table({
+@TypeOrmEntity({
   name: 'transaction',
 })
 export class Transaction {
