@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { TypeOrmModule } from "@nestjs/typeorm";
 import { BalanceEvent } from "./balance-event.entity.js";
 import { EntitiesService } from "./entities.service.js";
 import { Entity } from "./entity.entity.js";
