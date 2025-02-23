@@ -8,7 +8,7 @@ export const defaults = {
   limit: 100,
 }
 
-export class GetLatestTransactionsQuery {
+export class GetLatestTransfersQuery {
   @Type(() => Number)
   @IsInt()
   @IsPositive()

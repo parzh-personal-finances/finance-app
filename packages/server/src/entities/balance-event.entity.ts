@@ -1,17 +1,17 @@
 import { Column, Entity as TypeOrmEntity, JoinColumn, ManyToOne } from 'typeorm';
 import { ColumnMoney } from '@/db/column-money.decorator.js';
-import { Transaction } from '@/transactions/transaction.entity.js';
+import { Transfer } from '@/transfers/transfer.entity.js';
 import { Entity } from '@/entities/entity.entity.js';
 
 @TypeOrmEntity('balance_event')
 export class BalanceEvent {
   @Column({
-    name: 'transaction_id',
+    name: 'transfer_id',
     type: 'uuid',
     primary: true,
     update: false,
   })
-  readonly transactionId!: string
+  readonly transferId!: string
 
   @Column({
     name: 'entity_id',
@@ -26,13 +26,13 @@ export class BalanceEvent {
 
   // ***
 
-  @ManyToOne(() => Transaction, (transaction) => transaction.balanceEvents, {
+  @ManyToOne(() => Transfer, (transfer) => transfer.balanceEvents, {
     onDelete: 'RESTRICT',
   })
   @JoinColumn({
-    name: 'transaction_id',
+    name: 'transfer_id',
   })
-  readonly transaction!: Transaction;
+  readonly transfer!: Transfer;
 
   @ManyToOne(() => Entity, (entity) => entity.balanceEvents, {
     onDelete: 'RESTRICT',

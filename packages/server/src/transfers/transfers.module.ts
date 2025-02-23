@@ -1,11 +1,11 @@
 import { Module } from "@nestjs/common";
-import { Transaction } from "./transaction.entity.js";
-import { TransactionsService } from "./transactions.service.js";
 import { DbModule } from "@/db/db.module.js";
+import { Transfer } from "./transfer.entity.js";
+import { TransfersService } from "./transfers.service.js";
 
 /** @private */
 const typeOrmEntities = DbModule.forFeature([
-  Transaction,
+  Transfer,
 ])
 
 @Module({
@@ -13,11 +13,11 @@ const typeOrmEntities = DbModule.forFeature([
     typeOrmEntities,
   ],
   providers: [
-    TransactionsService,
+    TransfersService,
   ],
   exports: [
     typeOrmEntities,
-    TransactionsService,
+    TransfersService,
   ],
 })
-export class TransactionsModule { }
+export class TransfersModule { }

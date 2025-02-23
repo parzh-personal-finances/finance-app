@@ -7,7 +7,7 @@ import { DevModule } from './dev/dev.module.js'
 import { HttpLoggerMiddleware } from './http-logger.middleware.js'
 import { HttpRateLimiterMiddleware } from './http-rate-limiter.middleware.js'
 import { EntitiesModule } from '@/entities/entities.module.js'
-import { TransactionsModule } from '@/transactions/transactions.module.js'
+import { TransfersModule } from '@/transfers/transfers.module.js'
 
 /** @private */
 interface RegisterParams {
@@ -19,7 +19,7 @@ interface RegisterParams {
     ConfigModule,
     DbModule,
     EntitiesModule,
-    TransactionsModule,
+    TransfersModule,
     HealthModule,
   ],
   providers: [

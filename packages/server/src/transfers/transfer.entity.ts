@@ -5,20 +5,20 @@ import { ColumnMoney } from '@/db/column-money.decorator.js'
 import { BalanceEvent } from '@/entities/balance-event.entity.js'
 
 @TypeOrmEntity({
-  name: 'transaction',
+  name: 'transfer',
 })
-export class Transaction {
-  @PrimaryColumnUUID('transaction_id')
+export class Transfer {
+  @PrimaryColumnUUID('transfer_id')
   readonly id!: string
 
   @Column({
-    name: 'transaction_timestamp',
+    name: 'transfer_timestamp',
     type: 'bigint',
     update: false,
   })
   readonly timestamp!: number
 
-  @ColumnMoney('transaction_amount')
+  @ColumnMoney('transfer_amount')
   amount!: number
 
   @ManyToOne(() => Entity, {
@@ -41,18 +41,18 @@ export class Transaction {
   })
   readonly entityCredit!: Entity
 
-  @ManyToOne(() => Transaction, {
+  @ManyToOne(() => Transfer, {
     eager: false,
     nullable: true,
     onDelete: 'RESTRICT',
   })
   @JoinColumn({
-    name: 'transaction_refunded_transaction_id',
+    name: 'transfer_refunded_transfer_id',
   })
-  readonly refundedTransaction?: Transaction | null
+  readonly refundedTransfer?: Transfer | null
 
   @Column({
-    name: 'transaction_description',
+    name: 'transfer_description',
     type: 'varchar',
     length: 255,
     nullable: true,
@@ -62,7 +62,7 @@ export class Transaction {
 
   // ***
 
-  @OneToMany(() => BalanceEvent, (event) => event.transaction, {
+  @OneToMany(() => BalanceEvent, (event) => event.transfer, {
     eager: true,
     nullable: false,
     onDelete: 'RESTRICT',
