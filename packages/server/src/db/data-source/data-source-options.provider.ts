@@ -40,7 +40,7 @@ export const dataSourceOptionsProvider: Provider<DataSourceOptions> = {
     migrationsTableName: 'migration',
     migrationsTransactionMode: 'all',
     migrationsRun: true,
-    synchronize: config.isDevelopment(),
+    synchronize: false,
     logger: dbLogger,
   }),
 }
