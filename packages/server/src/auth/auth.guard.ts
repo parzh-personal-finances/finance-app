@@ -30,10 +30,10 @@ export class AuthGuard implements CanActivate {
   constructor(protected readonly config: ConfigService) { }
 
   protected readonly middleware = auth({
-    secret: this.config.get(this.config.keys.JWT_SECRET),
-    audience: this.config.get(this.config.keys.JWT_AUDIENCE),
-    issuerBaseURL: this.config.get(this.config.keys.JWT_ISSUER_BASE_URL),
-    tokenSigningAlg: this.config.get(this.config.keys.JWT_ALGORITHM),
+    secret: this.config.get(this.config.keys.AUTH0_CLIENT_ID),
+    audience: this.config.get(this.config.keys.AUTH0_API_ID),
+    issuerBaseURL: this.config.get(this.config.keys.AUTH0_DOMAIN),
+    tokenSigningAlg: 'HS256',
   })
 
   async canActivate(context: ExecutionContext): Promise<true> {
