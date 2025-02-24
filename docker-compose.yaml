@@ -35,6 +35,9 @@ services:
       DB_NAME:
       DB_USER:
       DB_PASS:
+      JWT_ISSUER_BASE_URL:
+      JWT_AUDIENCE:
+      JWT_SECRET:
     ports:
       - '${SERVER_PORT_HOST}:${SERVER_PORT_CONTAINER}'
 

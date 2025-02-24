@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer'
-import { IsInt, IsNotEmpty, IsOptional, IsPort, IsPositive, IsString, Min } from 'class-validator'
+import { IsInt, IsNotEmpty, IsOptional, IsPort, IsPositive, IsString, IsUrl, Min } from 'class-validator'
+import { AlgorithmName } from '@/auth/algorithm-name.js'
 import { EnvName } from './env-name.js'
 import { IsValidEnum } from './is-valid-enum.decorator.js'
 
@@ -19,6 +20,7 @@ export const defaults = {
   DB_PORT: 5432,
   RATE_LIMITER_TIMEFRAME_MSEC: 1000,
   RATE_LIMITER_MAX_HITS_PER_TIMEFRAME: 5,
+  JWT_ALGORITHM: AlgorithmName.HS256,
 } satisfies Partial<ConfigDTO>
 
 export class ConfigDTO {
@@ -62,4 +64,23 @@ export class ConfigDTO {
   @Min(MIN_RATE_LIMITER_MAX_HITS_PER_TIMEFRAME)
   readonly RATE_LIMITER_MAX_HITS_PER_TIMEFRAME: number =
     defaults.RATE_LIMITER_MAX_HITS_PER_TIMEFRAME
+
+  @IsString()
+  @IsNotEmpty()
+  readonly JWT_SECRET!: string
+
+  @IsString()
+  @IsNotEmpty()
+  readonly JWT_AUDIENCE!: string
+
+  @IsUrl({
+    allow_fragments: false,
+    allow_query_components: false,
+    disallow_auth: true,
+    require_protocol: true,
+  })
+  readonly JWT_ISSUER_BASE_URL!: string
+
+  @IsValidEnum(AlgorithmName)
+  readonly JWT_ALGORITHM: AlgorithmName = defaults.JWT_ALGORITHM
 }
