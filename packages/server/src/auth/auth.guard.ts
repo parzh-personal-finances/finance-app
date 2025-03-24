@@ -42,9 +42,13 @@ export class AuthGuard implements CanActivate {
     const res = http.getResponse<Response>()
 
     const error = await new Promise<UnauthorizedError | null>((resolve, reject) => {
-      this.middleware(req, res, (arg: unknown) => {
+      this.middleware(req, res, (arg?: Error | string) => {
         if (arg instanceof UnauthorizedError || arg == null) {
           return resolve(arg ?? null)
+        }
+
+        if (arg instanceof Error) {
+          return reject(new JWTMiddlewareUnknownError(arg))
         }
 
         return reject(
@@ -71,6 +75,14 @@ export class AuthGuard implements CanActivate {
     }
 
     throw new HttpException(error.message, error.statusCode, options)
+  }
+}
+
+export class JWTMiddlewareUnknownError extends ServerError {
+  public override readonly statusCode = '503'
+
+  constructor(public readonly error: Error) {
+    super('Unknown error in JWT middleware')
   }
 }
 
